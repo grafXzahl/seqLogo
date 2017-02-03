@@ -156,20 +156,41 @@ letterG <- function(x.pos,y.pos,ht,wt,id=NULL){
 
 }
 
+## N
 
+letterN <- function (x.pos, y.pos, ht, wt, id = NULL) {
+
+  x <- c(0.1, 0.1, 2, 8, 8, 9.9, 9.9, 8, 2, 2)
+  y <- c(0.1, 9.9, 9.9, 2, 9.9, 9.9, 0.1, 0.1, 8, 0.1)
+  x <- 0.1 * x
+  y <- 0.1 * y
+  x <- x.pos + wt * x
+  y <- y.pos + ht * y
+  if (is.null(id)) {
+    id <- rep(1, 10)
+  }
+  else {
+    id <- rep(id, 10)
+  }
+  fill <- "gray"
+  list(x = x, y = y, id = id, fill = fill)
+
+}
 
 addLetter <- function(letters,which,x.pos,y.pos,ht,wt){
   
   if (which == "A"){
     letter <- letterA(x.pos,y.pos,ht,wt)
-  }else if (which == "C"){
+  } else if (which == "C"){
     letter <- letterC(x.pos,y.pos,ht,wt)    
-  }else if (which == "G"){
+  } else if (which == "G"){
     letter <- letterG(x.pos,y.pos,ht,wt)    
-  }else if (which == "T"){
+  } else if (which == "T"){
     letter <- letterT(x.pos,y.pos,ht,wt)    
-  }else{
-    stop("which must be one of A,C,G,T")
+  else if (which == "N") {
+    letter <- letterN(x.pos, y.pos, ht, wt)
+  } else {
+    stop(" ERROR: which must be one of A, C, G, T, N")
   }
 
   letters$x <- c(letters$x,letter$x)
@@ -197,7 +218,7 @@ seqLogo <- function(pwm, ic.scale=TRUE, xaxis=TRUE, yaxis=TRUE, xfontsize=15, yf
     stop("Columns of PWM must add up to 1.0")
 
   
-  chars <- c("A","C","G","T")
+  chars <- c("A","C","G","T","N)
   letters <- list(x=NULL,y=NULL,id=NULL,fill=NULL)
   npos <- ncol(pwm)
 
